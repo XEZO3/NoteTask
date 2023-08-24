@@ -13,4 +13,8 @@ class Note extends Model
         'note',
         'user_id',
     ];
+
+    function User(){
+        return $this->belongsTo(User::class);
+    }
 }

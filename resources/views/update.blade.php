@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>notes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@extends('_layout')
+@section('content')
     <style>
         .update-form input{
             border-radius: 30px;
@@ -18,8 +12,6 @@
         }
         
     </style>
-</head>
-<body style="background:#F2F6FA">
     <div class="container ">
         
         <div class="row mt-5 justify-content-start">
@@ -35,7 +27,7 @@
             <form class="update-form" id="update-form" style="max-width: 30rem;margin:auto;">
                 <div class="mb-3">
                   <label  class="form-label">title</label>
-                  <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" disabled id="title">
                   
                 </div>
                 <div id="update-message-title" style="color: red;font-size:18px">
@@ -43,12 +35,15 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">the note</label>
-                  <textarea  id="note" class="form-control" style="border-radius: 30px;min-height:300px;max-height:300px"></textarea>
+                  <textarea  id="note" disabled class="form-control" style="border-radius: 30px;min-height:300px;max-height:300px"></textarea>
                 </div>
                 <div id="update-message-note" style="color: red;font-size:18px">
 
                 </div>
-                <button type="submit" class="btn btn-primary mb-4" style="font-size:20px">update</button>
+                <button type="button" id="edit" class="btn btn-primary mb-4" style="font-size:20px">edit</button>
+                <button type="button" id="cancel" style="display: none" class="btn btn-danger mb-4" style="font-size:20px">cancel</button>
+                <button type="submit" id="save" style="display: none" class="btn btn-primary mb-4" style="font-size:20px">save</button>
+
               </form>
               
         </div>
@@ -60,6 +55,33 @@
     
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const title = document.getElementById("title");
+    const note = document.getElementById("note");
+    const edit = document.getElementById("edit");
+    const cancel = document.getElementById("cancel");
+    const save = document.getElementById("save");
+      
+    edit.addEventListener("click", function () {
+        title.disabled = false;
+        note.disabled = false;
+        cancel.style.display = "block";
+        edit.style.display = "none";
+        save.style.display="block" 
+    });
+
+    cancel.addEventListener("click", function () {
+        title.disabled = true;
+        note.disabled = true;
+        cancel.style.display = "none";
+        edit.style.display = "block";
+        save.style.display="none" 
+    });
+});
+
+
+
+
         $(document).ready(function() {
             var csrfToken  = "{{csrf_token()}}"
             $.ajaxSetup({
@@ -76,16 +98,15 @@
     
                 $.ajax({
                     url: "/api/note/update/{{$id}}",
-                     // Replace with your login route URL
+                    
                     type: 'put',
                     data: {
                         title: title,
                         note: note
                     },
                     success: function(response) {
-                        // Handle successful login
-                       // $('#update-message').text('Login successful. Redirecting...');
-                        window.location.href = '/'; // Redirect to homepage or desired route
+    
+                        window.location.href = '/'; 
                     },
                     error: function(xhr, status, error) {
                         var errorMessage = xhr.responseJSON.errors || 'add note faild';
@@ -108,16 +129,12 @@
                 
             },
             error: function (xhr, textStatus, errorThrown) {
-                if (xhr.status === 401) {
-                    localStorage.removeItem('token');                  
-                    window.location.href = '/login'; 
-                } else {
+                
                     console.log('Error');
                     
-                }
+              
             }
         });
         });
     </script>
-</body>
-</html>
+@endsection

@@ -13,12 +13,23 @@ class noteController extends Controller
     public function __construct(NoteRepository $noteRepository){
         $this->noteRepository = $noteRepository;
     }
-    function getall(){
-        $nots = $this->noteRepository->getall(
-            function ($query){
-                return $query->where("user_id",auth()->id());
-            }  
-        );
+    function getall(Request $req){
+        $search = $req->input("search");
+        $nots=null;
+        if($search !=null){
+            $nots = $this->noteRepository->getall(
+                function ($query)use($search){
+                    return $query->where("user_id",auth()->id())->where('note','LIKE', '%' . $search . '%')->orWhere('title','LIKE', '%' . $search . '%');
+                }  
+            );
+        }else{
+            $nots = $this->noteRepository->getall(
+                function ($query){
+                    return $query->where("user_id",auth()->id());
+                }  
+            );
+        }
+        
         return response()->json([
             'returnCode'=>200,
             'message'=>"",

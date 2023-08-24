@@ -1,40 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>notes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@extends('_layout')
+@section('content')
 <style>
     .long-string-column {
     max-width: 200px;
-   
     word-break: break-word;
-    
 }
 
+/* Adjust the minimum width for mobile devices */
+@media (max-width: 576px) {
+    .long-string-column {
+        min-width: 100px; /* Set your desired minimum width */
+    }
+}
+   
+.filter-form input{
+            border-radius: 0.25rem;
+           
+        }
 
-</style>
-</head>
-<body style="background:#F2F6FA">
+        .note-container{
+            overflow-y:scroll 
+        }
+        </style>
+
+
     <div class="container ">
         <div class="row mt-5 justify-content-center">
-           <div class="col-6">
-            <form>
-                <input type="text" style="width: 70%" class="form-control" style="display: inline">
-                <button style="display: inline">search</button>
-            </form>
+           <div class="col-4" style="margin-right:-20px ">
+            <form id="filter-form" class="filter-form" method="get">
+                <input type="text" id="search" class="form-control"  placeholder="search your notes">
+                <div id="search-message-note" style="color: red;font-size:18px">
+
+                </div>
+           
            </div>
+           <div class="col-auto" style="margin-right:-20px ">
+            <button class="btn btn-primary">Search</button>
+           </div>
+           <div class="col-auto">
+            <button type="reset" onclick="getdata()" style="color:red" class="btn">clear</button>
+           </div>
+        </form>
         </div>
-        <div class="row mt-2 justify-content-end">
-            <div class="col-auto">
-                <a href="/note/create" class="btn btn-primary">add new note</a>
-            </div>
-        </div>
+       
     </div>
-<div class="container mt-1 border" style="border-radius: 30px">
-    <table class="table">
+<div class="container mt-4 bg-white note-container" style="max-height: 68vh" >
+    <div class="table-responsive">
+    <table class="table table-hover  bg-white" >
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -48,6 +60,14 @@
            
         </tbody>
       </table>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-4 justify-content-end">
+        <div class="col-auto">
+            <a href="/note/create" class="btn btn-primary">Add new note</a>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -86,12 +106,7 @@
                getdata()
             },
             error: function (xhr, textStatus, errorThrown) {
-                if (xhr.status === 401) {
-                    localStorage.removeItem('token');                 
-                    window.location.href = '/login';
-                } else {
-                    console.log('Error');
-                }
+                alert("error")
             }
         });
         });
@@ -112,19 +127,43 @@
                 
             },
             error: function (xhr, textStatus, errorThrown) {
-                if (xhr.status === 401) {
-                    localStorage.removeItem('token');                  
-                    window.location.href = '/login'; 
-                } else {
-                    console.log('Error');
-                    
-                }
+                
             }
         });
     }
-   
+    window.getdata = getdata;
+
+    
+        $('#filter-form').submit(function(e) {
+                e.preventDefault();
+    
+                var search = $('#search').val();
+               
+    
+                $.ajax({
+                    url: "/api/note/getall",
+                     // Replace with your login route URL
+                    type: 'get',
+                    data: {
+                        search: search,
+                       
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                     
+                        tablebody(response)
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = xhr.responseJSON.errors;
+
+                        $('#search-message-note').text(errorMessage.note.join(', '));
+                    }
+                });
+            });
     
     });
 </script>
-</body>
-</html>
+@endsection
