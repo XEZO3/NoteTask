@@ -10,7 +10,7 @@
 </head>
 <body>
   <nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand" style="margin-left:17px " href="#">User Nots</a>
+    <a class="navbar-brand" style="margin-left:17px " href="#">User Notes</a>
     <a onclick="logout()" style="float: right;margin-right:12px;color:white" href="#"><i style="font-size: 30px"  class="material-symbols-outlined">
         logout
     </i></a>

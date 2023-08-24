@@ -19,32 +19,34 @@
         
     </style>
 </head>
-<body style="background:#F2F6FA">
+<body  style="background-color:white">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <div class="container mt-5 pt-5">
         <div class="row align-items-center d-flex justify-content-center" style="flex-direction:column;min-height: 65vh;">
-            <div class="col-7 border " style="border-radius: 30px;">
-                <h1 style="text-align: center">Sign In</h1>
-                <form class="login-form" id="login-form" style="max-width: 30rem;margin:auto;">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                      
-                    </div>
-                    <div id="login-message-email" style="color: red;font-size:18px">
-
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password">
-                    </div>
-                    <div id="login-message-password" style="color: red;font-size:18px">
-
-                    </div>
-                    <p>have an account? <a href="/register" style="text-decoration: none">create account</a></p>
-                    <button type="submit" class="btn btn-primary mb-4">Submit</button>
-                  </form>
+            <div class="col-7 border "  style="box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);border-radius:20px;height:62vh">
+                <h1  style="text-align: center;margin-top: 5rem;">Sign In</h1>
+               
+                    <form class="login-form " id="login-form" style="max-width: 30rem;margin:auto;">
+                        <div class="mb-3 ">
+                          <label for="exampleInputEmail1" class="form-label">Email address</label>
+                          <input type="email" style="border:1.5px solid" class="form-control" id="email" aria-describedby="emailHelp">
+                          
+                        </div>
+                        <div id="login-message-email" style="color: red;font-size:18px">
+    
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <input type="password" style="border:1.5px solid" class="form-control" id="password">
+                        </div>
+                        <div id="login-message-password" style="color: red;font-size:18px">
+    
+                        </div>
+                        <p>have an account? <a href="#" style="text-decoration: none">create account</a></p>
+                        <button type="submit" style="border: 1.5px solid" class="btn btn-primary mb-4">Submit</button>
+                      </form>
+               
                   
             </div>
         </div>

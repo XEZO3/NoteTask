@@ -87,7 +87,7 @@
                     row.append($('<td>').text(item.title));
                     row.append($('<td class="long-string-column">').text(item.note));
                     row.append($('<td>').text(formattedDate));
-                    row.append($('<td>').html("<a id='delete' class='btn btn-danger' data-index="+item.id+">delete</a> <a class='btn btn-primary' href='/note/update/"+item.id+"'>update</a>"));
+                    row.append($('<td>').html("<a id='delete' class='btn btn-danger' data-index="+item.id+">Delete</a> <a class='btn btn-primary' href='/note/update/"+item.id+"'>Update</a>"));
                     tableBody.append(row);
                 });
     }
