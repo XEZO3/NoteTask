@@ -20,43 +20,60 @@ Copy code
 cp .env.example .env
 Start the Laravel Sail containers:
 
-    ```bash
-    Copy code
+
+```
     ./vendor/bin/sail up -d
-Install PHP dependencies:
+```
+# Install PHP dependencies:
 
 bash
 Copy code
-    ```./vendor/bin/sail composer install
-Generate the application key:
+    ```
+    ./vendor/bin/sail composer install
+    ```
+# Generate the application key:
 
 bash
 Copy code
-    ```./vendor/bin/sail artisan key:generate
+    ```
+    ./vendor/bin/sail artisan key:generate
+     ```
 Access the application at http://localhost
 
-Database Migration and Seeding
+# Database Migration and Seeding
 Migrate the database:
 
 bash
 Copy code
-    ```./vendor/bin/sail artisan migrate
+    ```
+    ./vendor/bin/sail artisan migrate
+     ```
 Seed the database:
 
 bash
 Copy code
-    ```./vendor/bin/sail artisan db:seed
-Additional Notes
+    ```
+    ./vendor/bin/sail artisan db:seed
+     ```
+# Generating JWT Secret Key
+```
+./vendor/bin/sail artisan jwt:secret
+```     
+# Additional Notes
 If you want to refresh the database with new migrations and seed data:
 
 bash
 Copy code
-    ```./vendor/bin/sail artisan migrate:refresh --seed
+    ```
+    ./vendor/bin/sail artisan migrate:refresh --seed
+     ```
 To stop the Sail containers:
 
 bash
 Copy code
-    ```./vendor/bin/sail down
+    ```
+    ./vendor/bin/sail down
+     ```
 You can customize the .env file with your database credentials, application settings, and more.
 
 
