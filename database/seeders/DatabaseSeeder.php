@@ -21,43 +21,43 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        User::create([
+        User::factory()->create([
             'name' => 'user1',
             'email' => 'user1@gmail.com',
             'password'=>bcrypt("123"),
         ]);
-        User::create([
+        User::factory()->create([
             'name' => 'user2',
             'email' => 'user2@gmail.com',
             'password'=>bcrypt("123"),
         ]);
-        User::create([
+        User::factory()->create([
             'name' => 'user3',
             'email' => 'user3@gmail.com',
             'password'=>bcrypt("123"),
         ]);
-        User::create([
+        User::factory()->create([
             'name' => 'user4',
             'email' => 'user4@gmail.com',
             'password'=>bcrypt("123"),
         ]);
 
-        Note::create([
+        Note::factory()->create([
             'title' => 'note1',
             'note' => 'lorem',
             'user_id'=>1,
         ]);
-        Note::create([
+        Note::factory()->create([
             'title' => 'noteq',
             'note' => 'lorem',
             'user_id'=>2,
         ]);
-        Note::create([
+        Note::factory()->create([
             'title' => 'note3',
             'note' => 'lorem',
             'user_id'=>3,
         ]);
-        Note::create([
+        Note::factory()->create([
             'title' => 'note4',
             'note' => 'lorem',
             'user_id'=>4,
