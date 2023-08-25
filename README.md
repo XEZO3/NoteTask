@@ -41,6 +41,7 @@ Copy code
 Access the application at http://localhost
 
 # Database Migration and Seeding
+## change .env file set db username to sail and password to password
 Migrate the database:
 
 bash
