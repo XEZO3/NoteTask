@@ -19,7 +19,11 @@ class noteController extends Controller
         if($search !=null){
             $nots = $this->noteRepository->getall(
                 function ($query)use($search){
-                    return $query->where("user_id",auth()->id())->where('note','LIKE', '%' . $search . '%')->orWhere('title','LIKE', '%' . $search . '%');
+                    return $query->where("user_id",auth()->id())
+                    ->where(function($query) use($search){
+                        $query->where('note','LIKE', '%' . $search . '%')
+                              ->orWhere('title','LIKE', '%' . $search . '%');
+                    });
                 }  
             );
         }else{
