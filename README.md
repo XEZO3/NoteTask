@@ -20,9 +20,9 @@ Copy code
 cp .env.example .env
 Start the Laravel Sail containers:
 
-bash
-Copy code
-    ```./vendor/bin/sail up -d
+    ```bash
+    Copy code
+    ./vendor/bin/sail up -d
 Install PHP dependencies:
 
 bash
